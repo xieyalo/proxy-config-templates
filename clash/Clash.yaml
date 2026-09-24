@@ -85,7 +85,7 @@ dns:
 proxy-providers:
   airport:
     type: http
-    url: "https://tie.yalo.cloudns.ch/sub?token=4ea05a05ca02c0293ba169fe7045c250"
+    url: "********"
     interval: 86400
     path: ./providers/airport.yaml
     health-check:
