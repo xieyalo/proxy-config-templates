@@ -73,93 +73,47 @@ dns:
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
+  # 国内域名用国内 DoH，防止明文 DNS 被劫持
   nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
   # 解析机场节点域名用的 DNS
   proxy-server-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  # 国内域名强制走国内 DoH，不走国外 DNS
+  nameserver-policy:
+    "geosite:cn":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
 
-# ===== 机场订阅 (把下面的 url 换成你自己的) =====
-proxy-providers:
-  airport:
-    type: http
-    url: "********"
-    interval: 86400
-    path: ./providers/airport.yaml
-    health-check:
-      enable: true
-      url: http://www.gstatic.com/generate_204
-      interval: 300
+# ===== 手动节点（把你的 Oracle / serv00 节点写在这里）=====
+# 也可以在 Clash Verge 界面里导入，节点会自动出现在这里
+proxies:
+  # 示例（删掉注释按格式填写）：
+  # - name: Oracle-US
+  #   type: vmess
+  #   server: your-domain.com
+  #   port: 443
+  #   uuid: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  #   alterId: 0
+  #   cipher: auto
+  #   tls: true
+  #   network: ws
+  #   ws-opts:
+  #     path: /path
+  #     headers:
+  #       Host: your-domain.com
 
 proxy-groups:
-  # ===== 总出口 =====
+  # ===== 总出口（手动选择你的 VPS 节点）=====
+  # 在 proxies: 下添加 Oracle / serv00 节点后，在这里手动切换
   - name: 🟢 Proxy
     type: select
     proxies:
-      - ♻️ 自动选择
-      - 🇭🇰 香港
-      - 🇺🇸 美国
-      - 🇯🇵 日本
-      - 🇸🇬 新加坡
-      - 🇰🇷 韩国
-      - 🇨🇳 台湾
       - 🚀 直接连接
 
-  # ===== 自动选择 / 地区分组 =====
-  # 用正则从机场节点里筛出对应地区，自动选延迟最低的
-  - name: ♻️ 自动选择
-    type: url-test
-    use: [airport]
-    filter: "HongKong|HK|香港|🇭🇰|US|America|美|🇺🇸|JP|Japan|日本|🇯🇵|Singapore|SG|新加坡|🇸🇬|Korea|KR|韩国|🇰🇷|TW|Taiwan|台湾|🇨🇳|🇹🇼"
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-  - name: 🇭🇰 香港
-    type: url-test
-    use: [airport]
-    filter: "HongKong|HK|香港|🇭🇰"
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-  - name: 🇺🇸 美国
-    type: url-test
-    use: [airport]
-    filter: "US|America|美|🇺🇸"
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-  - name: 🇯🇵 日本
-    type: url-test
-    use: [airport]
-    filter: "JP|Japan|日本|🇯🇵"
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-  - name: 🇸🇬 新加坡
-    type: url-test
-    use: [airport]
-    filter: "Singapore|SG|新加坡|🇸🇬"
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-  - name: 🇰🇷 韩国
-    type: url-test
-    use: [airport]
-    filter: "Korea|KR|韩国|🇰🇷"
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-  - name: 🇨🇳 台湾
-    type: url-test
-    use: [airport]
-    filter: "TW|Taiwan|台湾|🇨🇳|🇹🇼"
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-
-  # ===== 业务分组 =====
+  # ===== 业务分组（全部跟随总出口）=====
   - name: ⛔️ 广告拦截
     type: select
     proxies:
@@ -169,76 +123,38 @@ proxy-groups:
     type: select
     proxies:
       - 🟢 Proxy
-      - 🇺🇸 美国
-      - 🇯🇵 日本
-      - 🇸🇬 新加坡
-      - 🇭🇰 香港
-      - 🇰🇷 韩国
-      - 🇨🇳 台湾
   - name: 📺 谷歌服务
     type: select
     proxies:
-      - 🇰🇷 韩国
-      - 🇨🇳 台湾
-      - 🇯🇵 日本
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
       - 🟢 Proxy
   - name: Ⓜ️ 微软服务
     type: select
     proxies:
-      - 🚀 直接连接
       - 🟢 Proxy
-      - 🇺🇸 美国
-      - 🇯🇵 日本
-      - 🇸🇬 新加坡
-      - 🇭🇰 香港
-      - 🇰🇷 韩国
-      - 🇨🇳 台湾
+      - 🚀 直接连接
   - name: 🤖 AIGC
     type: select
     proxies:
-      - 🇸🇬 新加坡
       - 🟢 Proxy
-      - 🇺🇸 美国
-      - 🇯🇵 日本
-      - 🇰🇷 韩国
-      - 🇨🇳 台湾
   - name: 📲 电报信息
     type: select
     proxies:
       - 🟢 Proxy
-      - 🇺🇸 美国
-      - 🇯🇵 日本
-      - 🇸🇬 新加坡
-      - 🇭🇰 香港
-      - 🇰🇷 韩国
-      - 🇨🇳 台湾
   - name: 💹 券商
     type: select
     proxies:
       - 🚀 直接连接
-      - 🇭🇰 香港
-      - 🇸🇬 新加坡
-      - 🇺🇸 美国
       - 🟢 Proxy
   - name: 🏦 银行
     type: select
     proxies:
       - 🚀 直接连接
-      - 🇭🇰 香港
       - 🟢 Proxy
   - name: 🍎 苹果服务
     type: select
     proxies:
       - 🚀 直接连接
       - 🟢 Proxy
-      - 🇺🇸 美国
-      - 🇯🇵 日本
-      - 🇸🇬 新加坡
-      - 🇭🇰 香港
-      - 🇰🇷 韩国
-      - 🇨🇳 台湾
   - name: 🚀 直接连接
     type: select
     proxies:
@@ -249,7 +165,6 @@ proxy-groups:
       - 🟢 Proxy
       - 🚀 直接连接
 
-# 规则集: Sukka (ruleset.skk.moe) 提供 Clash 专用格式，domainset 用 domain，non_ip / ip 用 classical
 rule-providers:
   youtube:
     type: http
@@ -469,6 +384,34 @@ rule-providers:
     url: https://ruleset.skk.moe/Clash/ip/china_ip.txt
     path: ./rules/china_ip.txt
     interval: 86400
+  china_self:
+    type: http
+    behavior: domain
+    format: text
+    url: https://raw.githubusercontent.com/xieyalo/proxy-config-templates/main/shadowrocket/rules/China.list
+    path: ./rules/china_self.list
+    interval: 86400
+  global_self:
+    type: http
+    behavior: domain
+    format: text
+    url: https://raw.githubusercontent.com/xieyalo/proxy-config-templates/main/shadowrocket/rules/Global.list
+    path: ./rules/global_self.list
+    interval: 86400
+  apple_self:
+    type: http
+    behavior: domain
+    format: text
+    url: https://raw.githubusercontent.com/xieyalo/proxy-config-templates/main/shadowrocket/rules/Apple.list
+    path: ./rules/apple_self.list
+    interval: 86400
+  wechat_self:
+    type: http
+    behavior: domain
+    format: text
+    url: https://raw.githubusercontent.com/xieyalo/proxy-config-templates/main/shadowrocket/rules/WeChat.list
+    path: ./rules/wechat_self.list
+    interval: 86400
 
 rules:
   # ===== 个人规则写在这里，越靠前优先级越高 =====
@@ -491,6 +434,8 @@ rules:
   - RULE-SET,download_non_ip,🟢 Proxy
 
   # 苹果服务
+  - RULE-SET,apple_self,🍎 苹果服务
+  - RULE-SET,apple_self,🍎 苹果服务
   - RULE-SET,icloud_private_relay_domainset,🍎 苹果服务
   - RULE-SET,apple_cdn_non_ip,🍎 苹果服务
   - RULE-SET,apple_cn_non_ip,🍎 苹果服务
@@ -508,22 +453,62 @@ rules:
   - PROCESS-NAME,Telegram,📲 电报信息
   # AI 服务 (OpenAI / Claude / Gemini 等)
   - RULE-SET,ai_non_ip,🤖 AIGC
+  # AI 手写补充 (规则集未覆盖)
+  - DOMAIN-SUFFIX,brightline.tv,🤖 AIGC
+  - DOMAIN-SUFFIX,character.ai,🤖 AIGC
+  - DOMAIN-SUFFIX,cursor.com,🤖 AIGC
+  - DOMAIN-SUFFIX,discomax.com,🤖 AIGC
+  - DOMAIN-SUFFIX,huggingface.co,🤖 AIGC
+  - DOMAIN-SUFFIX,litix.io,🤖 AIGC
+  - DOMAIN-SUFFIX,meta.ai,🤖 AIGC
+  - DOMAIN-SUFFIX,midjourney.com,🤖 AIGC
+  - DOMAIN-SUFFIX,mistral.ai,🤖 AIGC
+  - DOMAIN-SUFFIX,muse.ai,🤖 AIGC
+  - DOMAIN-SUFFIX,notebooklm.google.com,🤖 AIGC
+  - DOMAIN-SUFFIX,poe.com,🤖 AIGC
   # 其余 Google 域名与 YouTube 同区，保持账号地区一致 (置于 ai 之后，不影响 Gemini 分流)
   - RULE-SET,google,📺 谷歌服务
   # 银行券商直连
+  - DOMAIN-SUFFIX,hsbc.com.hk,DIRECT
+  - DOMAIN-SUFFIX,hsbc.com,DIRECT
+  - DOMAIN-SUFFIX,bochk.com,DIRECT
+  - DOMAIN-SUFFIX,ocbc.com,DIRECT
+  - DOMAIN-SUFFIX,ocbc.com.hk,DIRECT
+  - DOMAIN-SUFFIX,ocbc.com.sg,DIRECT
   - DOMAIN-SUFFIX,wise.com,DIRECT
+  - DOMAIN-SUFFIX,transferwise.com,DIRECT
   - DOMAIN-SUFFIX,schwab.com,DIRECT
+  - DOMAIN-SUFFIX,schwabapi.com,DIRECT
+  - DOMAIN-SUFFIX,charlesschwab.com,DIRECT
+  - DOMAIN-SUFFIX,schwabcdn.com,DIRECT
   - DOMAIN-SUFFIX,thinkorswim.com,DIRECT
   - DOMAIN-SUFFIX,tdameritrade.com,DIRECT
   - DOMAIN-SUFFIX,bbae.com,DIRECT
   - DOMAIN-SUFFIX,bbae.io,DIRECT
+  - DOMAIN-SUFFIX,bbaecache.com,DIRECT
+  - DOMAIN-SUFFIX,bbaepro.com,DIRECT
+  - DOMAIN-SUFFIX,longbridge.global,DIRECT
+  - DOMAIN-SUFFIX,longbridge.hk,DIRECT
+  - DOMAIN-SUFFIX,longbridge-inc.com,DIRECT
+  - DOMAIN-SUFFIX,usmart.hk,DIRECT
+  - DOMAIN-SUFFIX,oracle.com,DIRECT
+  - DOMAIN-SUFFIX,oraclecloud.com,DIRECT
+  - RULE-SET,wechat_self,DIRECT
   - RULE-SET,broker,💹 券商
+  - RULE-SET,wechat_self,DIRECT
   - RULE-SET,bank,🏦 银行
+  # firstrade 强制走代理
+  - DOMAIN-SUFFIX,firstrade.com,🟢 Proxy
+  - DOMAIN-SUFFIX,firstrade.com.tw,🟢 Proxy
 
   # 常见海外域名
+  - RULE-SET,global_self,🟢 Proxy
+  - RULE-SET,global_self,🟢 Proxy
   - RULE-SET,global_non_ip,🟢 Proxy
 
   # 国内常见域名 / 直连域名 / 内网域名
+  - RULE-SET,china_self,DIRECT
+  - RULE-SET,china_self,DIRECT
   - RULE-SET,domestic_non_ip,DIRECT
   - RULE-SET,direct_non_ip,DIRECT
   - RULE-SET,lan_non_ip,DIRECT
