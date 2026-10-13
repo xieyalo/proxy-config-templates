@@ -325,6 +325,23 @@ rule-providers:
     interval: 86400
 
 rules:
+  # ===== 测漏与隐私防探测（最高优先级，强制 Proxy） =====
+  - DOMAIN-SUFFIX,browserleaks.com,🟢 Proxy
+  - DOMAIN-SUFFIX,dnsleaktest.com,🟢 Proxy
+  - DOMAIN-SUFFIX,ipleak.net,🟢 Proxy
+  - DOMAIN-SUFFIX,ipinfo.io,🟢 Proxy
+  - DOMAIN-SUFFIX,ipapi.co,🟢 Proxy
+  - DOMAIN-SUFFIX,whoer.net,🟢 Proxy
+  - DOMAIN-SUFFIX,myip.la,🟢 Proxy
+  - DOMAIN-SUFFIX,ip.sb,🟢 Proxy
+  - DOMAIN-SUFFIX,ipify.org,🟢 Proxy
+  - DOMAIN-SUFFIX,ipapi.is,🟢 Proxy
+  - DOMAIN-SUFFIX,speedtest.net,🟢 Proxy
+  - DST-PORT,3478,🟢 Proxy
+  - DST-PORT,5349,🟢 Proxy
+  - DST-PORT,19302,🟢 Proxy
+  - DOMAIN-KEYWORD,stun,🟢 Proxy
+  - DOMAIN-KEYWORD,turn,🟢 Proxy
   # ===== 个人规则写在这里，越靠前优先级越高 =====
   # - DOMAIN-SUFFIX,example.com,🟢 Proxy
   # - PROCESS-NAME,Example,DIRECT   (PROCESS-NAME 仅 macOS 有效)
@@ -389,6 +406,23 @@ rules:
   - DOMAIN-SUFFIX,thinkorswim.com,DIRECT
   - DOMAIN-SUFFIX,transferwise.com,DIRECT
   - DOMAIN-SUFFIX,usmart.hk,DIRECT
+  # 补充：众安 / 大象 / AlipayHK / 蚂蚁银行 / 新加坡盈立 / iFAST GB / 熊猫速汇 / Starryblu 直连
+  - DOMAIN-SUFFIX,zabank.com,DIRECT
+  - DOMAIN-SUFFIX,za.group,DIRECT
+  - DOMAIN-SUFFIX,elebank.com,DIRECT
+  - DOMAIN-SUFFIX,airstarbank.com,DIRECT
+  - DOMAIN-SUFFIX,alipay.hk,DIRECT
+  - DOMAIN-SUFFIX,antbank.hk,DIRECT
+  - DOMAIN-SUFFIX,antbank.sg,DIRECT
+  - DOMAIN-SUFFIX,usmart.sg,DIRECT
+  - DOMAIN-SUFFIX,usmartsecurities.com,DIRECT
+  - DOMAIN-SUFFIX,usmartglobal.com,DIRECT
+  - DOMAIN-SUFFIX,ifastgb.com,DIRECT
+  - DOMAIN-SUFFIX,ifastcorp.com,DIRECT
+  - DOMAIN-SUFFIX,ifastfinancial.com,DIRECT
+  - DOMAIN-SUFFIX,ifastnetwork.com,DIRECT
+  - DOMAIN-SUFFIX,pandaremit.com,DIRECT
+  - DOMAIN-SUFFIX,starryblu.com,DIRECT
   - DOMAIN-SUFFIX,wise.com,DIRECT
   - RULE-SET,wechat_self,DIRECT
 
