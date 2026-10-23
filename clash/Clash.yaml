@@ -527,6 +527,8 @@ rules:
   - DOMAIN-SUFFIX,starryblu.com,DIRECT
   - DOMAIN-SUFFIX,oracle.com,DIRECT
   - DOMAIN-SUFFIX,oraclecloud.com,DIRECT
+  - DOMAIN-SUFFIX,vultr.com,DIRECT
+
   - RULE-SET,wechat_self,DIRECT
   - RULE-SET,broker,💹 券商
   - RULE-SET,wechat_self,DIRECT

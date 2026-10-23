@@ -399,6 +399,8 @@ rules:
   - DOMAIN-SUFFIX,ocbc.com.sg,DIRECT
   - DOMAIN-SUFFIX,oracle.com,DIRECT
   - DOMAIN-SUFFIX,oraclecloud.com,DIRECT
+  - DOMAIN-SUFFIX,vultr.com,DIRECT
+
   - DOMAIN-SUFFIX,schwab.com,DIRECT
   - DOMAIN-SUFFIX,schwabapi.com,DIRECT
   - DOMAIN-SUFFIX,schwabcdn.com,DIRECT
