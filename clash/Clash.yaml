@@ -434,6 +434,7 @@ rules:
   # ===== 个人规则写在这里，越靠前优先级越高 =====
   # - DOMAIN-SUFFIX,example.com,🟢 Proxy
   # - PROCESS-NAME,Example,DIRECT
+  - DOMAIN-SUFFIX,day.app,🟢 Proxy
 
   # YouTube 固定走「📺 谷歌服务」，避免出口地区漂移导致 Premium 状态异常 (需放在 CDN / 流媒体规则之前)
   - RULE-SET,youtube,📺 谷歌服务
