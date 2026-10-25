@@ -1,0 +1,74 @@
+# NAME: Advertising
+# REPO: https://github.com/xieyalo/proxy-config-templates
+# UPDATED: 2026-10-25
+# DESCRIPTION: 高频开屏广告、移动广告联盟 SDK 与隐私追踪拦截规则
+
+# === 字节跳动 / 穿山甲广告联盟 ===
+DOMAIN-SUFFIX,pglstatp-toutiao.com
+DOMAIN-SUFFIX,pangolin-sdk-toutiao.com
+DOMAIN-SUFFIX,pangolin-sdk-toutiao-b.com
+DOMAIN-SUFFIX,toblog.ctobsnssdk.com
+DOMAIN-SUFFIX,ad.toutiao.com
+DOMAIN-SUFFIX,dm.bytedance.com
+DOMAIN-SUFFIX,sf3-fe-tos.pglstatp-toutiao.com
+DOMAIN-KEYWORD,pangolin-sdk
+
+# === 腾讯优量汇 / 广点通 ===
+DOMAIN-SUFFIX,mi.gdt.qq.com
+DOMAIN-SUFFIX,win.gdt.qq.com
+DOMAIN-SUFFIX,v.gdt.qq.com
+DOMAIN-SUFFIX,t.gdt.qq.com
+DOMAIN-SUFFIX,pgdt.gtimg.cn
+DOMAIN-SUFFIX,qzs.gdt.qq.com
+DOMAIN-SUFFIX,splashqqlive.gtimg.com
+DOMAIN-SUFFIX,wa.gtimg.com
+DOMAIN-SUFFIX,adnet.qq.com
+DOMAIN-SUFFIX,e.qq.com
+DOMAIN-KEYWORD,gdt.qq.com
+
+# === 百度百青藤 / 百度联盟广告 ===
+DOMAIN-SUFFIX,mobads.baidu.com
+DOMAIN-SUFFIX,mobads-logs.baidu.com
+DOMAIN-SUFFIX,cpro.baidu.com
+DOMAIN-SUFFIX,pos.baidu.com
+DOMAIN-SUFFIX,cpu.baidu.com
+DOMAIN-KEYWORD,mobads
+
+# === 快手广告联盟 ===
+DOMAIN-SUFFIX,ad.e.kuaishou.com
+DOMAIN-SUFFIX,open.e.kuaishou.com
+DOMAIN-SUFFIX,adserver.kuaishou.com
+
+# === 阿里妈妈 / 友盟追踪与广告 ===
+DOMAIN-SUFFIX,alimama.com
+DOMAIN-SUFFIX,tanx.com
+DOMAIN-SUFFIX,adash.man.aliyuncs.com
+DOMAIN-SUFFIX,adashx.m.taobao.com
+DOMAIN-SUFFIX,afpapi.alimama.com
+DOMAIN-SUFFIX,ulogs.umeng.com
+DOMAIN-SUFFIX,alogs.umeng.com
+
+# === 京东 / 美团 / 滴滴推广广告 ===
+DOMAIN-SUFFIX,ad.meituan.com
+DOMAIN-SUFFIX,dunion-api.xiaojukeji.com
+DOMAIN-SUFFIX,kepler.jd.com
+DOMAIN-SUFFIX,bdsp.x.jd.com
+
+# === 国际移动广告联盟与 SDK ===
+DOMAIN-SUFFIX,applvn.com
+DOMAIN-SUFFIX,applovin.com
+DOMAIN-SUFFIX,unityads.unity3d.com
+DOMAIN-SUFFIX,vungle.com
+DOMAIN-SUFFIX,ironsrc.com
+DOMAIN-SUFFIX,mintegral.com
+DOMAIN-SUFFIX,admob.com
+DOMAIN-SUFFIX,doubleclick.net
+DOMAIN-SUFFIX,googleadservices.com
+DOMAIN-SUFFIX,ads.yahoo.com
+DOMAIN-SUFFIX,exosrv.com
+DOMAIN-SUFFIX,aaxads.com
+DOMAIN-SUFFIX,ad-srv.net
+DOMAIN-SUFFIX,adbutter.net
+DOMAIN-SUFFIX,adtechus.com
+DOMAIN-SUFFIX,adtrue.com
+DOMAIN-SUFFIX,adxprtz.com
